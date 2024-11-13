@@ -55,6 +55,7 @@ T ListArray<T>::operator[](int pos) {
 		throw std::out_of_range("Posición inválida");
 	}
 }
+template <typename T>
 void ListArray<T>::resize(int new_size) {
 	T* nuevoArr = new T[new_size];
 	int i = 0;
@@ -140,6 +141,7 @@ bool ListArray<T>::empty() {
 		return true;
 	}else{
 		return false;
+	}
 }
 template<typename T>
 int ListArray<T>::size() {
