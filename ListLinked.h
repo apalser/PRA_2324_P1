@@ -38,7 +38,7 @@ ListLinked<T>::ListLinked() : n{0}, first{nullptr} {}
 template <typename T>
 ListLinked<T>::~ListLinked(){
 	Node<T>* aux = first->next;
-	if(first != nullptr){
+	while(first != nullptr){
 		aux = first->next;
 		delete first;
 		first = aux;
@@ -49,11 +49,11 @@ T ListLinked<T>::operator[](int pos) {
 	return get(pos);
 }
 template <typename T>
-void ListLinked::insert(int pos, T e) {
+void ListLinked<T>::insert(int pos, T e) {
 	if(pos < 0 || pos > n){
 		throw std::out_of_range("Posición inválida");
 	}else if(empty()){
-		first = new Node(e, first);
+		first = new Node(e);
 	}else if(pos == 0){
 		first = new Node(e, first);
 	}else if(pos == n){
