@@ -30,11 +30,12 @@ class ListLinked : public List<T> {
 		T remove(int pos) override;
 		T get(int pos) override;
 		int search(T e) override;
-		bool empty() override;												        int size() override;
+		bool empty() override;												        
+		int size() override;
 };
-template<typename T>
+template <typename T>
 ListLinked<T>::ListLinked() : n{0}, first{nullptr} {}
-template<typename T>
+template <typename T>
 ListLinked<T>::~ListLinked(){
 	Node<T>* aux = first->next;
 	if(first != nullptr){
@@ -43,11 +44,11 @@ ListLinked<T>::~ListLinked(){
 		first = aux;
 	}
 }
-template<typename T>
+template <typename T>
 T ListLinked<T>::operator[](int pos) {
 	return get(pos);
 }
-template<typename T>
+template <typename T>
 void ListLinked::insert(int pos, T e) {
 	if(pos < 0 || pos > n){
 		throw std::out_of_range("Posición inválida");
@@ -66,10 +67,12 @@ void ListLinked::insert(int pos, T e) {
 		Node<T>* next = first->next;
 		if(next != nullptr){
 			for(int i = 1; i < pos; i++){ 								
-				aux = next;														next = next->next;
+				aux = next;						
+				next = next->next;
 			}
-		}															aux->next = new Node(e,next);
-																}
+		}
+			aux->next = new Node(e,next);
+	}														
 	n++;
 }
 template <typename T>
@@ -87,15 +90,20 @@ T ListLinked<T>::remove(int pos) {
 		throw std::out_of_range("Posición inválida");
 	}else if(pos == 0){
 		Node<T>* aux = first->next;
-		a = first->data;													delete first; 
-		first = aux;													}else{
+		a = first->data;													
+		delete first; 
+		first = aux;
+	}else{
 		Node<T>* paux = first;
-		Node<T>* del = first->next;												for(int i = 1; i < pos; i++){ 
+		Node<T>* del = first->next;												
+		for(int i = 1; i < pos; i++){ 
 			paux = del;
 			del = del->next;
-		}															a = del->data;
+		}															
+		a = del->data;
 		paux->next = del->next;
-		delete del;													}
+		delete del;													
+	}
 	n--;
 	return a;
 }
